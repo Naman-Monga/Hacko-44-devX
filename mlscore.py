@@ -2,7 +2,7 @@
 # Pycaret Install kr lena and pandas too
 
 import pandas as pd
-dataset = pd.read_csv('C:/Users/Immortal Blue/PycharmProjects/Hacko-44-devX/automobile.csv')
+dataset = pd.read_csv('/content/automobile.csv')
 # path of the file ^
 
 columnNameReg = 'price'
@@ -13,7 +13,7 @@ columnNameReg = 'price'
 # ---------------------------------------------------
 from pycaret.regression import *
 
-exp_reg101 = setup(data = dataset, target = columnNameReg, data_split_shuffle=False)
+exp_reg101 = setup(data = dataset, target = columnNameReg, train_size = 0.7, categorical_features = None, categorical_imputation = 'constant', ordinal_features = None, high_cardinality_features = None, high_cardinality_method = 'frequency', numeric_features = None, numeric_imputation = 'mean', date_features = None, ignore_features = None, normalize = True, normalize_method = 'zscore', transformation = False, transformation_method = 'yeo-johnson', handle_unknown_categorical = True, unknown_categorical_method = 'least_frequent', pca = False, pca_method = 'linear', pca_components = None, ignore_low_variance = False, combine_rare_levels = False, rare_level_threshold = 0.10, bin_numeric_features = None, remove_outliers = False, outliers_threshold = 0.05, remove_multicollinearity = False, multicollinearity_threshold = 0.9, remove_perfect_collinearity = False, create_clusters = False, cluster_iter = 20, polynomial_features = False, polynomial_degree = 2, trigonometry_features = False, polynomial_threshold = 0.1, group_features = None, group_names = None, feature_selection = False, feature_selection_threshold = 0.8, feature_interaction = False, feature_ratio = False, interaction_threshold = 0.01, transform_target = False, transform_target_method = 'box-cox', data_split_shuffle = True, n_jobs = -1, html = True, session_id = None, log_experiment = False, experiment_name = None, log_plots = False, log_profile = False, log_data = False, silent=False, verbose = True, profile = False)
 cmp = compare_models()
 storecmp = pull()
 #print(storecmp)
@@ -29,7 +29,7 @@ print(cmplist)
 
 columnNameClass = 'body-style'
 from pycaret.classification import *
-clf1 = setup(data, target = columnNameClass, data_split_shuffle=False)
+clf1 = setup(data = dataset, target = columnNameClass, train_size = 0.7, categorical_features = None, categorical_imputation = 'constant', ordinal_features = None, high_cardinality_features = None, high_cardinality_method = 'frequency', numeric_features = None, numeric_imputation = 'mean', date_features = None, ignore_features = None, normalize = True, normalize_method = 'zscore', transformation = False, transformation_method = 'yeo-johnson', handle_unknown_categorical = True, unknown_categorical_method = 'least_frequent', pca = False, pca_method = 'linear', pca_components = None, ignore_low_variance = False, combine_rare_levels = False, rare_level_threshold = 0.10, bin_numeric_features = None, remove_outliers = False, outliers_threshold = 0.05, remove_multicollinearity = False, multicollinearity_threshold = 0.9, remove_perfect_collinearity = False, create_clusters = False, cluster_iter = 20, polynomial_features = False, polynomial_degree = 2, trigonometry_features = False, polynomial_threshold = 0.1, group_features = None, group_names = None, feature_selection = False, feature_selection_threshold = 0.8, feature_interaction = False, feature_ratio = False, interaction_threshold = 0.01, fix_imbalance = False, fix_imbalance_method = None, data_split_shuffle = True, n_jobs = -1, html = True, session_id = None, log_experiment = False, experiment_name = None, log_plots = False, log_profile = False, log_data = False, silent=False, verbose=True, profile = False)
 cmp2 = compare_models()
 storecmp2 = pull()
 #print(storecmp2)
