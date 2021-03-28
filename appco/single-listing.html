@@ -30,7 +30,8 @@
 
 <body>
     <style>
-        #chartdiv {
+        #chartdiv,
+        #chartdiv_line {
             width: 100%;
             height: 500px;
         }
@@ -337,6 +338,58 @@
             }); // end am4core.ready()
         </script>
 
+
+        <!-- Chart code -->
+        <script>
+            am4core.ready(function() {
+
+                // Themes begin
+                am4core.useTheme(am4themes_animated);
+                // Themes end
+
+                var chart_line = am4core.create("chartdiv_line", am4charts.XYChart);
+
+                var data = [];
+                var value = 50;
+                for (var i = 0; i < 300; i++) {
+                    var date = new Date();
+                    date.setHours(0, 0, 0, 0);
+                    date.setDate(i);
+                    value -= Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
+                    data.push({
+                        date: date,
+                        value: value
+                    });
+                }
+
+                chart_line.data = data;
+
+                // Create axes
+                var dateAxis = chart_line.xAxes.push(new am4charts.DateAxis());
+                dateAxis.renderer.minGridDistance = 60;
+
+                var valueAxis = chart_line.yAxes.push(new am4charts.ValueAxis());
+
+                // Create series
+                var series = chart_line.series.push(new am4charts.LineSeries());
+                series.dataFields.valueY = "value";
+                series.dataFields.dateX = "date";
+                series.tooltipText = "{value}"
+
+                series.tooltip.pointerOrientation = "vertical";
+
+                chart_line.cursor = new am4charts.XYCursor();
+                chart_line.cursor.snapToSeries = series;
+                chart_line.cursor.xAxis = dateAxis;
+
+                //chart.scrollbarY = new am4core.Scrollbar();
+                chart_line.scrollbarX = new am4core.Scrollbar();
+
+            }); // end am4core.ready()
+        </script>
+
+        <!-- HTML -->
+        <div class="mb-5" id="chartdiv_line"></div>
         <!-- HTML -->
 
         <!-- ['Gradient Boosting Classifier', 'Decision Tree Classifier', 'Random Forest Classifier', 'Logistic Regression', 'Light Gradient Boosting Machine', 'SVM - Linear Kernel', 'Extra Trees Classifier', 'Ada Boost Classifier', 'Ridge Classifier', 'Linear Discriminant
