@@ -91,6 +91,33 @@ def detail_dataset(request, id):
     graph3d_reg = dataset.clas_cols
     graph3d_reg = json.loads(graph3d_reg)
 
+    # tables creation
+    table = "<table>"
+    table += "<tr>"
+    for heading in dataset.clas_res[0]:
+        table += "<th>"+heading+"</tr>"
+    table += "</tr>"
+
+    for row in dataset.clas_res:
+        table += "<tr>"
+        for i, value in enumerate(row):
+            table += "<td>"+value+"</td>"
+        table += "</tr>"
+    table += "</table>"
+
+    table_reg = "<table>"
+    table_reg += "<tr>"
+    for heading in dataset.clas_cols[0]:
+        table_reg += "<th>"+heading+"</tr>"
+    table_reg += "</tr>"
+
+    for row in dataset.clas_cols:
+        table_reg += "<tr>"
+        for i, value in enumerate(row):
+            table_reg += "<td>"+value+"</td>"
+        table_reg += "</tr>"
+    table_reg += "</table_reg>"
+
     return render(request, 'core/dataset.html', {"dataset": dataset, "thefile": thefile, 'graph3d': graph3d})
 
 
